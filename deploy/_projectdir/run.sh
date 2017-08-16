@@ -16,7 +16,7 @@ RUNDIR=$(dirname $SOCKFILE)
 test -d "$RUNDIR" || mkdir -p "$RUNDIR"
  
 # Start your gunicorn
-exec gunicorn twmail:app -b 0.0.0.0:5000 \
+exec gunicorn3 twmail:app -b 0.0.0.0:5000 \
   --name "$NAME" \
   --workers "$NUM_WORKERS" \
   --user="$USER" --group="$GROUP" \
