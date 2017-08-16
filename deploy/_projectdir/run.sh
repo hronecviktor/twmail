@@ -14,14 +14,13 @@ echo "Starting $NAME"
 . /home/twmail/code/twmail/venv/bin/activate
 RUNDIR=$(dirname $SOCKFILE)
 test -d "$RUNDIR" || mkdir -p "$RUNDIR"
- 
+
 # Start your gunicorn
-exec gunicorn3 twmail:app -b 0.0.0.0:5000 \
+exec gunicorn twmail:app -b 0.0.0.0:5000 \
   --name "$NAME" \
   --workers "$NUM_WORKERS" \
   --user="$USER" --group="$GROUP" \
   --bind=unix:"$SOCKFILE" \
   --pythonpath /home/twmail/code/twmail \
   --log-file="$LOGFILE" \
-  --daemon \
-  --pid="$PIDFILE"
+  --daemon
