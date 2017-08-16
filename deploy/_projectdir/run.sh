@@ -7,11 +7,11 @@ USER=twmail
 GROUP=twmail
 NUM_WORKERS=3
 PIDFILE=/var/run/twmail.pid
- 
+
 echo "Starting $NAME"
- 
+
 # Create the run directory if it doesn't exist
-. /home/twmail/code/mhdbot/venv/bin/activate
+. /home/twmail/code/twmail/venv/bin/activate
 RUNDIR=$(dirname $SOCKFILE)
 test -d "$RUNDIR" || mkdir -p "$RUNDIR"
  
@@ -23,5 +23,5 @@ exec gunicorn twmail:app -b 0.0.0.0:5000 \
   --bind=unix:"$SOCKFILE" \
   --pythonpath /home/twmail/code/twmail \
   --log-file="$LOGFILE" \
-  --daemon  \
+  --daemon \
   --pid="$PIDFILE"
